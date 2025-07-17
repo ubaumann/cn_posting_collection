@@ -1,0 +1,26 @@
+name: Loopback0 Create
+method: POST
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/interface
+body:
+  content: |-
+    {
+      "Cisco-IOS-XE-native:Loopback": [
+        {
+          "name": "0",
+          "description": "Created by Posting"
+        }
+      ]
+    }
+  content_type: application/json
+auth:
+  type: basic
+  basic:
+    username: $DEVICE_USER
+    password: $DEVICE_PASSWORD
+headers:
+- name: Accept
+  value: application/yang-data+json
+- name: Content-Type
+  value: application/yang-data+json
+options:
+  verify_ssl: false

@@ -1,0 +1,15 @@
+name: Loopback0 Delete
+method: DELETE
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/interface/Loopback=0
+auth:
+  type: basic
+  basic:
+    username: $DEVICE_USER
+    password: $DEVICE_PASSWORD
+headers:
+- name: Accept
+  value: application/yang-data+json
+- name: Content-Type
+  value: application/yang-data+json
+options:
+  verify_ssl: false

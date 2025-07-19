@@ -1,5 +1,5 @@
-name: Interfaces
-url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/interface
+name: Loopback0 Get
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/interface/Loopback=0
 auth:
   type: basic
   basic:

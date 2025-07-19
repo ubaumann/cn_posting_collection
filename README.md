@@ -10,7 +10,7 @@ posting --collection . --env sw01-pod-1.env
 ### Docker
 
 ```bash
-docker run --rm -it -e DEVICE="sw01-pod-1.network.garden" -e DEVICE_USER="ins" -e DEVICE_PASSWORD="ins@lab" posting:latest posting --collection . --env .env
+docker run --rm -it -e DEVICE="sw01-pod-1.network.garden" -e DEVICE_USER="ins" -e DEVICE_PASSWORD="ins@lab" ghcr.io/ubaumann/cn_posting_collection posting --collection . --env .env
 ```
 
 ## Using in the terminal

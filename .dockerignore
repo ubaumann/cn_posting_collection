@@ -1,0 +1,4 @@
+README.md
+ganglion.toml
+*.env
+.venv

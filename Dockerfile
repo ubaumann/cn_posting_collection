@@ -3,7 +3,7 @@ FROM python:3.12
 WORKDIR /data
 ADD . .
 RUN pip install --root-user-action=ignore textual-web &&\
-    pip install --root-user-action=ignore posting
+    pip install --root-user-action=ignore posting tree-sitter==0.24.0
 RUN chmod u=rx,g=r,o=r entrypoint.sh
 
 ENTRYPOINT [ "./entrypoint.sh" ]

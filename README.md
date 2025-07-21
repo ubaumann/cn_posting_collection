@@ -27,5 +27,7 @@ Press "Shift" + "INS"
 ## Run container and connect to ganglion
 
 ```bash
-docker run --rm -it -e DEVICE="sw01-pod-1.network.garden" -e DEVICE_USER="ins" -e DEVICE_PASSWORD="REPLACE_WITH_PASSWORD" -e API_SERVER="10.255.255.254:8080" ghcr.io/ubaumann/cn_posting_collection:main
+docker run --rm -it -e DEVICE="sw01-pod-1.network.garden" -e DEVICE_USER="ins" -e DEVICE_PASSWORD="REPLACE_WITH_PASSWORD" -e API_SERVER="10.255.255.254:8080" -e APP_NAME=sw01 ghcr.io/ubaumann/cn_posting_collection:main
 ```
+
+When the environment variable `APP_ACCOUNT` is set, the run.py script tries to get the key from the file `KEY_DIRECTORY / account`.

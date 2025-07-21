@@ -42,6 +42,6 @@ if __name__ == "__main__":
                 f'[app.{app_name}]\ncommand = "posting --collection . --env .env"\n\n'
             )
         if api_key:
-            fp.write(f'[account]\napi_key = "{api_key}"')
+            fp.write(f'[account]\napi_key = "{api_key}"\n')
 
     app(["-e", "local", "-c", f"{CONFIG_FILE}"])

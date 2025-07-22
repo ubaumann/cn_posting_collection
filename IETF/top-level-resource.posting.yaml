@@ -1,0 +1,14 @@
+name: IETF top level resource
+url: https://$DEVICE/.well-known/host-meta
+auth:
+  type: basic
+  basic:
+    username: $DEVICE_USER
+    password: $DEVICE_PASSWORD
+headers:
+- name: Accept
+  value: application/yang-data+json
+- name: Content-Type
+  value: application/yang-data+json
+options:
+  verify_ssl: false

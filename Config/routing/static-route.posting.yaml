@@ -1,5 +1,8 @@
-name: IETF server module
-url: https://$DEVICE/restconf/data/ietf-yang-library:modules-state
+name: Static Route
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/ip/route/ip-route-interface-forwarding-list
+body:
+  content: ''
+  content_type: application/json
 auth:
   type: basic
   basic:

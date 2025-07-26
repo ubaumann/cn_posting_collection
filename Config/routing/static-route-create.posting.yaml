@@ -1,0 +1,32 @@
+name: Static Route Create
+description: Using patch to add a resource to a list
+method: PATCH
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/ip/route/ip-route-interface-forwarding-list
+body:
+  content: |-
+    {
+      "Cisco-IOS-XE-native:ip-route-interface-forwarding-list": [
+        {
+          "prefix": "192.168.1.0",
+          "mask": "255.255.255.0",
+          "fwd-list": [
+            {
+              "fwd": "172.16.0.6"
+            }
+          ]
+        }
+      ]
+    }
+  content_type: application/json
+auth:
+  type: basic
+  basic:
+    username: $DEVICE_USER
+    password: $DEVICE_PASSWORD
+headers:
+- name: Accept
+  value: application/yang-data+json
+- name: Content-Type
+  value: application/yang-data+json
+options:
+  verify_ssl: false

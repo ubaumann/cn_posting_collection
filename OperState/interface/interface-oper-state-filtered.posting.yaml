@@ -1,0 +1,15 @@
+name: Interface Oper State Loopback0 Oper-Status
+description: Operational State
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-interfaces-oper:interfaces/interface=Loopback0/oper-status
+auth:
+  type: basic
+  basic:
+    username: $DEVICE_USER
+    password: $DEVICE_PASSWORD
+headers:
+- name: Accept
+  value: application/yang-data+json
+- name: Content-Type
+  value: application/yang-data+json
+options:
+  verify_ssl: false

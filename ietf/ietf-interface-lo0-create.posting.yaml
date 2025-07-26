@@ -1,4 +1,4 @@
-name: IETF Loopback0 Create
+name: Loopback0 Create
 method: POST
 url: https://$DEVICE/restconf/data/ietf-interfaces:interfaces
 body:

@@ -1,0 +1,14 @@
+name: Routing State RIBs
+url: https://$DEVICE/restconf/data/ietf-routing:routing-state/routing-instance=default/ribs/
+auth:
+  type: basic
+  basic:
+    username: $DEVICE_USER
+    password: $DEVICE_PASSWORD
+headers:
+- name: Accept
+  value: application/yang-data+json
+- name: Content-Type
+  value: application/yang-data+json
+options:
+  verify_ssl: false

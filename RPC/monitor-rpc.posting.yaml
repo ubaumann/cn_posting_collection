@@ -1,0 +1,28 @@
+name: Monitor RPC
+method: POST
+url: https://$DEVICE/restconf/operations/Cisco-IOS-XE-rpc:monitor
+body:
+  content: |-
+    {
+      "capture": "Capture123",
+      "match": "any",
+      "interface": "GigabitEthernet1/0/1",
+      "limit": {
+        "duration": 60
+      },
+      "both": {},
+      "start": {}
+    }
+  content_type: application/json
+auth:
+  type: basic
+  basic:
+    username: $DEVICE_USER
+    password: $DEVICE_PASSWORD
+headers:
+- name: Accept
+  value: application/yang-data+json
+- name: Content-Type
+  value: application/yang-data+json
+options:
+  verify_ssl: false

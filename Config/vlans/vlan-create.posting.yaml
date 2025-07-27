@@ -1,0 +1,24 @@
+name: Vlan Create
+method: POST
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/vlan/
+body:
+  content: |-
+    {
+      "Cisco-IOS-XE-vlan:vlan-list": {
+        "id": 202,
+        "name": "Demo1"
+      }
+    }
+  content_type: application/json
+auth:
+  type: basic
+  basic:
+    username: $DEVICE_USER
+    password: $DEVICE_PASSWORD
+headers:
+- name: Accept
+  value: application/yang-data+json
+- name: Content-Type
+  value: application/yang-data+json
+options:
+  verify_ssl: false

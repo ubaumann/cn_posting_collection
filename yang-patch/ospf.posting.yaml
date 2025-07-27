@@ -1,0 +1,108 @@
+name: OSPF YANG Patch Example
+method: PATCH
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native
+body:
+  content: |-
+    {
+      "ietf-yang-patch:yang-patch": {
+        "patch-id": "YANG Patch example configuring OSPF",
+        "comment": "Enabling Routing, create Loopback and add OSPF configuration",
+        "edit": [
+          {
+            "edit-id": "Enabling Routing",
+            "operation": "replace",
+            "target": "/ip/routing-conf",
+            "value": {
+              "Cisco-IOS-XE-native:routing-conf": {
+                "routing": true
+              }
+            }
+          },
+          {
+            "edit-id": "Add Loopback2 Interface",
+            "operation": "replace",
+            "target": "/interface/Loopback=2",
+            "value": {
+              "Cisco-IOS-XE-native:Loopback": {
+                "name": 2,
+                "description": "Usedd as OSPF Router ID",
+                "ip": {
+                  "address": {
+                    "primary": {
+                      "address": "2.2.2.2",
+                      "mask": "255.255.255.255"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "edit-id": "Create OSPF pid, add network statement",
+            "operation": "merge",
+            "target": "/router/router-ospf/ospf/process-id=1",
+            "value": {
+              "Cisco-IOS-XE-ospf:process-id": [
+                {
+                  "id": "1",
+                  "auto-cost": {
+                    "reference-bandwidth": 400000
+                  },
+                  "router-id": "2.2.2.2",
+                  "network": [
+                    {
+                      "ip": "101.1.1.1",
+                      "wildcard": "0.0.0.0",
+                      "area": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "edit-id": "Add interface",
+            "operation": "replace",
+            "target": "/interface/GigabitEthernet=1%2F0%2F1",
+            "value": {
+              "Cisco-IOS-XE-native:GigabitEthernet": {
+                "name": "1/0/1",
+                "switchport-conf": {
+                  "switchport": false
+                },
+                "ip": {
+                  "address": {
+                    "primary": {
+                      "address": "101.1.1.1",
+                      "mask": "255.255.255.0"
+                    }
+                  }
+                },
+                "ipv6": {
+                  "address": {
+                    "prefix-list": [
+                      {
+                        "prefix": "3fff:beef:abba:c0fe::1/64"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  content_type: application/json
+auth:
+  type: basic
+  basic:
+    username: $DEVICE_USER
+    password: $DEVICE_PASSWORD
+headers:
+- name: Accept
+  value: application/yang-patch+json
+- name: Content-Type
+  value: application/yang-patch+json
+options:
+  verify_ssl: false

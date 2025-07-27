@@ -1,5 +1,5 @@
-name: Routing State RIB Default Route
-url: https://$DEVICE/restconf/data/ietf-routing:routing-state/routing-instance=default/ribs/rib=ipv4-default/routes/route=0.0.0.0%2F0/next-hop/
+name: GigabitEthernet1/0/1 Get
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/interface/GigabitEthernet=1%2F0%2F1
 auth:
   type: basic
   basic:

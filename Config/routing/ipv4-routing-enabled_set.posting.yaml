@@ -1,10 +1,12 @@
-name: Hostname Replace
+name: IPv4 Routing Enabled!
 method: PUT
-url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/hostname
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/ip/routing-conf
 body:
   content: |-
     {
-      "Cisco-IOS-XE-native:hostname": "sw99"
+      "Cisco-IOS-XE-native:routing-conf": {
+        "routing": true
+      }
     }
   content_type: application/json
 auth:

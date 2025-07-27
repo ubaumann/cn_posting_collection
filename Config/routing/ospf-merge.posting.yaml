@@ -1,0 +1,30 @@
+name: OSPF Merge
+method: PATCH
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/router/router-ospf/
+body:
+  content: |-
+    {
+      "Cisco-IOS-XE-ospf:router-ospf": {
+        "ospf": {
+          "process-id": [
+            {
+              "id": 1,
+              "router-id": "2.2.2.2"
+            }
+          ]
+        }
+      }
+    }
+  content_type: application/json
+auth:
+  type: basic
+  basic:
+    username: $DEVICE_USER
+    password: $DEVICE_PASSWORD
+headers:
+- name: Accept
+  value: application/yang-data+json
+- name: Content-Type
+  value: application/yang-data+json
+options:
+  verify_ssl: false

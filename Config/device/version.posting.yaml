@@ -1,12 +1,5 @@
-name: Hostname Replace
-method: PUT
-url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/hostname
-body:
-  content: |-
-    {
-      "Cisco-IOS-XE-native:hostname": "sw99"
-    }
-  content_type: application/json
+name: Version
+url: https://$DEVICE/restconf/data/Cisco-IOS-XE-native:native/version
 auth:
   type: basic
   basic:

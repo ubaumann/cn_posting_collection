@@ -25,7 +25,7 @@ body:
             "value": {
               "Cisco-IOS-XE-native:Loopback": {
                 "name": 2,
-                "description": "Usedd as OSPF Router ID",
+                "description": "Used as OSPF Router ID",
                 "ip": {
                   "address": {
                     "primary": {

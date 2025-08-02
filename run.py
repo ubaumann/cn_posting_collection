@@ -1,5 +1,6 @@
 import os
 import logging
+import httpx
 from pathlib import Path
 from textual_web.environment import ENVIRONMENTS, Environment
 
@@ -14,7 +15,8 @@ from textual_web.cli import app
 logger = logging.getLogger()
 
 CONFIG_FILE = Path("ganglion.toml")
-KEY_DIRECTORY = Path(".keys/")
+KEY_LOCATION = os.getenv("KEY_LOCATION", ".keys/")
+DECRYPTION_KEY = os.getenv("DECRYPTION_KEY", None)
 
 
 def get_name() -> str:
@@ -25,11 +27,25 @@ def get_key() -> str | None:
     account = os.getenv("APP_ACCOUNT", None)
     if account:
         try:
-            key_file = KEY_DIRECTORY / account
-            with key_file.open() as fp:
-                return fp.readline()
+            if KEY_LOCATION.startswith("http"):
+                key_url = f"{KEY_LOCATION}/{account}"
+                response = httpx.get(key_url)
+                response.raise_for_status()
+                key = response.text.strip()
+            else:
+                key_file = Path(KEY_LOCATION) / account
+                with key_file.open() as fp:
+                    key = fp.readline()
+            if DECRYPTION_KEY:
+                from cryptography.fernet import Fernet
+
+                fernet = Fernet(DECRYPTION_KEY)
+                return fernet.decrypt(key.encode()).decode()
+            return key.strip()
         except IOError as exc:
             logger.warning("Could not read file %s. Error: %s", key_file, exc)
+        except httpx.HTTPError as exc:
+            logger.warning("Could not read URL %s. Error: %s", key_url, exc)
     return None
 
 

@@ -17,6 +17,7 @@ logger = logging.getLogger()
 CONFIG_FILE = Path("ganglion.toml")
 KEY_LOCATION = os.getenv("KEY_LOCATION", ".keys/")
 DECRYPTION_KEY = os.getenv("DECRYPTION_KEY", None)
+ACCOUNT = os.getenv("APP_ACCOUNT", None)
 
 
 def get_name() -> str:
@@ -24,16 +25,15 @@ def get_name() -> str:
 
 
 def get_key() -> str | None:
-    account = os.getenv("APP_ACCOUNT", None)
-    if account:
+    if ACCOUNT:
         try:
             if KEY_LOCATION.startswith("http"):
-                key_url = f"{KEY_LOCATION}/{account}"
+                key_url = f"{KEY_LOCATION}/{ACCOUNT}"
                 response = httpx.get(key_url)
                 response.raise_for_status()
                 key = response.text.strip()
             else:
-                key_file = Path(KEY_LOCATION) / account
+                key_file = Path(KEY_LOCATION) / ACCOUNT
                 with key_file.open() as fp:
                     key = fp.readline()
             if DECRYPTION_KEY:
@@ -52,6 +52,11 @@ def get_key() -> str | None:
 if __name__ == "__main__":
     app_name = get_name()
     api_key = get_key()
+    if not api_key and ACCOUNT:
+        logger.error(
+            "No API key found. Please set the APP_ACCOUNT/KEY_LOCATION environment variables."
+        )
+        exit(1)
     with CONFIG_FILE.open("w") as fp:
         if app_name:
             fp.write(

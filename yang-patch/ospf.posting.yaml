@@ -106,3 +106,4 @@ headers:
   value: application/yang-patch+json
 options:
   verify_ssl: false
+  timeout: 20.0

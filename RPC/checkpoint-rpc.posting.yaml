@@ -1,6 +1,6 @@
 name: Checkpoint RPC
 method: POST
-url: https://$DEVICE/restconf/operations/cisco-ia:is-syncing/
+url: https://$DEVICE/restconf/operations/cisco-ia:checkpoint/
 auth:
   type: basic
   basic:

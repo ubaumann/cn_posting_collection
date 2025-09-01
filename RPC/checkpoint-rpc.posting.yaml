@@ -1,4 +1,7 @@
 name: Checkpoint RPC
+description: |-
+  Create a configuration rollback checkpoint.
+  Equivalent to the "archive config" CLI
 method: POST
 url: https://$DEVICE/restconf/operations/cisco-ia:checkpoint/
 auth:
